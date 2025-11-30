@@ -11,7 +11,7 @@ Mi objetivo es demostrar mis habilidades para crear, ejecutar y mantener tests r
 
 ### Proyectos
 
-#### Stage 1: Fundamentos de API Testing 
+#### Stage 1: Fundamentos de Web Automation Testing 
 - **Challenge:** Automatización de pruebas web sobre la página de herokuapp  [/01_Stage_1/Challenge/herokuapp]
 - **Mission:** Automatización de un flujo de negocio de nivel avanzado en la tienda de ropa online disponible en TestingYes [/01_Stage_1/Mission/testingYes]
 
