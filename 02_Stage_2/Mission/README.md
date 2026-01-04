@@ -1,12 +1,12 @@
-# Proyecto de Automatización con Playwright
+# Automatizando E2E con comportamientos avanzados
 
-Este proyecto automatiza pruebas E2E de la página demo.automationtesting utilizando Playwright.
+Este proyecto automatiza pruebas E2E de la página DemoQA utilizando Playwright.
 
 ## Historia de usuario
 
-Como usuario que desea crear una cuenta, 
-quiero ingresar primero mi correo electrónico para acceder al formulario de registro completo, 
-para poder completar mis datos personales y finalizar mi registro en la plataforma sin confusiones y de manera guiada.
+Como usuario que ingresa al sitio DemoQA
+quiero interactuar con todos los módulos disponibles en la página
+Para asegurar que todos los elementos y secciones del sitio funcionan según lo esperado
 
 
 
@@ -18,6 +18,6 @@ para poder completar mis datos personales y finalizar mi registro en la platafor
 
 ## ▶️ Ejecutar pruebas
     ```bash
-    npx playwright test --project=chromium
+    $env:USER_NAME="Tomilissa1"; $env:USER_PASS="Toli9190!"; npx playwright test --project=chromium
     ```
 

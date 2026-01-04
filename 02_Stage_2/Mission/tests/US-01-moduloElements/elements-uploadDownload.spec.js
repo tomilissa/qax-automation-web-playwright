@@ -15,7 +15,7 @@ test.describe('Upload and Download (Carga y Descarga de Archivos)', () => {
 
   test('Validar que la carga de archivos funciona correctamente', async ({ page }) => {
 
-    const filePath = path.resolve('testFile.txt');
+    const filePath = path.join(__dirname, 'testFile.txt');
     const uploadInput = page.locator('#uploadFile');
     const uploadedFilePathMessage = page.locator('#uploadedFilePath');
 
