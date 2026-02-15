@@ -17,6 +17,9 @@ const city = 'Jaiselmer';
 test.describe('Registro exitoso de un estudiante', () => {
 
   test.beforeEach(async ({ page }) => {
+    await context.route('**/*googleads*', (route) => route.abort());
+    await context.route('**/*doubleclick*', (route) => route.abort());
+    await context.route('**/*.ad*', (route) => route.abort());
     await page.goto('https://demoqa.com/');
     await selectCardandOption(page, 'Forms', 'Practice Form');
   });
