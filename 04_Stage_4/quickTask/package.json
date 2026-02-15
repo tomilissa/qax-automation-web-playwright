@@ -15,7 +15,8 @@
     "test:trace": "playwright test --trace on",
     "test:report": "playwright test --reporter=html",
     "show:report": "playwright show-report",
-    "show:trace": "playwright show-trace trace.zip"
+    "show:trace": "playwright show-trace trace.zip",
+    "test:record": "playwright codegen"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.0"

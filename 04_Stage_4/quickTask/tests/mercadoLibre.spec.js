@@ -5,23 +5,11 @@ import { generateRandomEmail } from '../tests/utils/dataGenerator';
     
     const userName = generateRandomEmail();
     
-    await page.goto('https://mercadolibre.com/');
-
-    const cookieButton = page.getByRole('button', { name: 'Aceptar cookies' });
-    if (await cookieButton.isVisible()) {
-        await cookieButton.click();
-    }
-
+    await page.goto('/');
     await page.getByRole('link', { name: 'Argentina' }).click();
-    await page.getByRole('link', { name: 'Supermercado' }).click();
-    await page.getByRole('link', { name: 'Agua Eco de los Andes Sin Gas Botella 500cc x1 Unidad' }).click();
-
-    const addBtn = page.locator('button:has-text("Agregar al carrito")');
-    await addBtn.click({ force: true });
-
-    const ingresarBtn = page.getByText('Ingresar')
-    await ingresarBtn.click({ force: true });
-    
+    await page.getByRole('link', { name: 'Electrónica, Audio y Video' }).click();
+    await page.getByRole('link', { name: 'Smart Tv LG Smart Tv 43ur8750' }).click();
+    await page.getByRole('button', { name: 'Comprar ahora' }).click();
     await page.locator('#user_id').fill(userName);
 
     });
