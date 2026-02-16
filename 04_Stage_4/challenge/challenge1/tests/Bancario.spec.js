@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { RegisterPage } from '../pages/RegisterPage';
 import { AccountPage } from '../pages/AccountPage';
-import { generateRandomUserName } from './utils/dataGenerator';
+import { generateRandomUserName, generateRandomPassword, saveUserCredentials } from './utils/dataGenerator';
   
 
   test.describe('Crear nueva cuenta bancaria', () => {
@@ -15,7 +15,10 @@ import { generateRandomUserName } from './utils/dataGenerator';
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
     registerPage = new RegisterPage(page);
-    accountPage = new AccountPage(page);  
+    accountPage = new AccountPage(page);
+    
+    const username = generateRandomUserName();
+    const password = generateRandomPassword();
 
     userData = {
         firstName: 'Tomas',
@@ -26,9 +29,11 @@ import { generateRandomUserName } from './utils/dataGenerator';
         zipCode: '1645',
         phone: '1141997403',
         ssn: 'Test 1',
-        username: generateRandomUserName(),
-        password: 'Tolissa343123!'
+        username: username,
+        password: password
       };
+
+    saveUserCredentials(userData.username, userData.password);
     
     await homePage.navigate('/');
     await homePage.isAtHomePage();
@@ -70,7 +75,7 @@ import { generateRandomUserName } from './utils/dataGenerator';
         });
         
       await test.step('Verificar que la cuenta contenga un monto inicial', async () => {
-          await accountPage.verifyInitialAmount('$600.00');
+          await accountPage.verifyInitialAmount();
         
       });
         

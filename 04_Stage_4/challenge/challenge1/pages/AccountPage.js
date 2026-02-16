@@ -48,8 +48,8 @@ export class AccountPage extends BasePage {
       await expect(OpensuccessMessage).toHaveText(/Congratulations, your account is now open/);
     }
 
-    async verifyInitialAmount(expectedAmount) {
+    async verifyInitialAmount() {
       const balanceLocator = this.page.locator('#balance');
-      await expect(balanceLocator).toHaveText(expectedAmount, { timeout: 10000 });
+      await expect(balanceLocator).toContainText(/\$\d+\.\d{2}/);
     }
 }

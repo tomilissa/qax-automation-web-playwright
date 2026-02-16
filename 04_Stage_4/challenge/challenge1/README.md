@@ -1,4 +1,4 @@
-# 🧪 QAXpert – Playwright Automation Project - Challenge 1 del Stage 4
+# 🧪 QAXpert – Playwright Automation Project - Challenges del Stage 4
 
 Este proyecto contiene pruebas automatizadas con Playwright usando JavaScript y el Playwright Test Runner, siguiendo buenas prácticas como estructura por tests y reutilización de utilidades.
 

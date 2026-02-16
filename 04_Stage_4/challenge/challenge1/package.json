@@ -16,7 +16,11 @@
     "test:report": "playwright test --reporter=html",
     "show:report": "playwright show-report",
     "show:trace": "playwright show-trace trace.zip",
-    "test:record": "playwright codegen"
+    "test:record": "playwright codegen",
+    "test:desktop": "playwright test --project=\"Desktop Chrome\" --project=\"Desktop Firefox\"",
+    "test:tablet": "playwright test --project=\"Ipad Safari\"",
+    "test:mobile": "playwright test --project=\"Mobile Chrome\" --project=\"Mobile Safari\" --project=\"Android Chrome\"",
+    "test:all": "npm run test:desktop && npm run test:tablet && npm run test:mobile"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.0"
