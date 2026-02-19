@@ -1,4 +1,4 @@
-# 🧪 QAXpert – Playwright Automation Project - Mission Stage 3
+# 🧪 QAXpert – Playwright Automation Project - Quick Task Stage 3
 
 Este proyecto contiene pruebas automatizadas con Playwright usando JavaScript y el Playwright Test Runner, siguiendo buenas prácticas como estructura por tests y reutilización de utilidades.
 
