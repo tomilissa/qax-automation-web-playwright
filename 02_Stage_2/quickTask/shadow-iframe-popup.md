@@ -9,3 +9,8 @@ page.frameLocator('#my-iframe').getBytext('Nibh netus aliquet nam mattis vestibu
 
 ## PopUp
 
+page.on('dialog', async dialog => {
+        console.log(`Mensaje recibido: ${dialog.message()}`);
+        expect(dialog.message()).toBe('Hello world!');
+        await dialog.accept();
+    });

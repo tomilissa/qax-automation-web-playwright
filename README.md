@@ -16,8 +16,9 @@ Mi objetivo es demostrar mis habilidades para crear, ejecutar y mantener tests r
 - **Mission:** Automatización de un flujo de negocio de nivel avanzado en la tienda de ropa online disponible en TestingYes [/01_Stage_1/Mission/testingYes]
 
 #### Stage 2:
-- **Challenge:** 
-- **Mission:** 
+- **Challenge 1:** Automatización de pruebas web sobre el formulario de registro de Demo Automation Testing [02_Stage_2/Challenge/Challenge_1]
+- **Challenge 2:** Automatización de pruebas web sobre la página de Demo Automation Testing [02_Stage_2/Challenge/Challenge_2]
+- **Mission:** Automatización de pruebas web sobre la página de DemoQA [/02_Stage_2/Mission]
 
 #### Stage 3:
 - **Challenge:** 
