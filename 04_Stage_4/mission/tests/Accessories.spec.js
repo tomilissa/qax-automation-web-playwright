@@ -2,7 +2,8 @@ import { test } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { AccessoriesPage } from '../pages/AccessoriesPage';
-import { generateRandomFirstName, generateRandomLastName, generateRandomEmail, generateRandomPassword, generateRandomBirthday, saveUserData, generateRandomAddress } from './utils/dataGenerator';
+import { OrderPage } from '../pages/OrderPage';
+import * as Utils from './utils/dataGenerator';
 
   test.describe('Navegación y selección de producto', () => {
 
@@ -10,23 +11,40 @@ import { generateRandomFirstName, generateRandomLastName, generateRandomEmail, g
   let accessoriesPage;
   let loginPage;
   let userData;
+  let orderPage;
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
     accessoriesPage = new AccessoriesPage(page);
     loginPage = new LoginPage(page);
+    orderPage = new OrderPage(page);
 
+    const randomLocation = Utils.generateRandomLocation();
+    
     userData = {
-        firstName: generateRandomFirstName(),
-        lastName: generateRandomLastName(),
-        email: generateRandomEmail(),
-        password: generateRandomPassword(),
-        birthDay: generateRandomBirthday(),
-        address: generateRandomAddress(),
+        firstName: Utils.generateRandomFirstName(),
+        lastName: Utils.generateRandomLastName(),
+        email: Utils.generateRandomEmail(),
+        password: Utils.generateRandomPassword(),
+        birthDay: Utils.generateRandomBirthday(),
+        address: randomLocation.address,
+        zipCode: randomLocation.zipCode,
+        city: randomLocation.city,
+        state: randomLocation.state,
+        shippingMessage: 'Please deliver between 9 AM and 5 PM.',
+        paymentMethod: 'Pay by bank wire',
     };
 
-    saveUserData(userData.firstName, userData.lastName, userData.email, userData.password, userData.birthDay, userData.address);
-    
+    Utils.saveUserData(
+        userData.firstName, 
+        userData.lastName, 
+        userData.email, 
+        userData.password, 
+        userData.birthDay, 
+        userData.address, 
+        userData.zipCode
+    );
+
     await homePage.navigate('');
     await homePage.isAtHomePage();
     });
@@ -130,9 +148,21 @@ import { generateRandomFirstName, generateRandomLastName, generateRandomEmail, g
         });
 
       await test.step('Completar addresses information', async () => {
-          await loginPage.fillAddressesData(userData);
-        });  
-      
+          await loginPage.fillLocationData(userData);
+        });
+        
+      await test.step('Seleccionar método de envío y detallar mensaje ', async () => {
+          await orderPage.selectShippingMethod(userData);
+        });
+
+      await test.step('Seleccionar método de pago', async () => {
+          await orderPage.selectPaymentMethod(userData);
+        });
+
+      await test.step('Validar que la orden de pago está confirmada', async () => {  
+          await orderPage.verifyOrderConfirmation();
+        });
+
     });   
 
 });

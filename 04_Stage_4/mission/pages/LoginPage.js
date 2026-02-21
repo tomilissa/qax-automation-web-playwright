@@ -25,8 +25,11 @@ this.loginPageTitle = 'Login';
   this.signInEmail = page.locator('#login-form input[name="email"]')
   this.signInPassword = page.locator('#login-form input[name="password"]');
   this.showBtn = page.getByRole('button', { name: 'Show' });
-  this.continueBtn = page.getByRole('button', { name: 'Continue' });
   this.address = page.locator('input[name="address1"]');
+  this.zipCode = page.locator('input[name="postcode"]');
+  this.city = page.locator('input[name="city"]');
+  this.state = page.locator('select[name="id_state"]');
+  this.continueBtn = page.getByRole('button', { name: 'Continue' });
   this.signOutBtn = page.getByRole('link', { name: ' Sign out' }); 
   this.userNameDisplay = page.locator('a.account span');
   this.authErrorMessage = page.locator('li.alert-danger');    
@@ -67,9 +70,12 @@ this.loginPageTitle = 'Login';
 
   }
 
-  async fillAddressesData(userData) {
+  async fillLocationData(userData) {
     await this.fill(this.address, userData.address);
-
+    await this.fill(this.zipCode, userData.zipCode);
+    await this.fill(this.city, userData.city);
+    await this.select(this.state, userData.state);
+    await this.doClick(this.continueBtn);
   }
 
   async fillSignInForm(userData) {

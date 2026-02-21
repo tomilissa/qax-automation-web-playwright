@@ -42,7 +42,7 @@ export function generateRandomBirthday() {
   return `${month}/${day}/${year}`;
 }
 
-export function generateRandomAddress() {
+export function generateRandomLocation() {
       const streets = ['Main St', 'Second St', 'Oak St', 'Park Ave', 'Washington St', 'Lakeview Dr', 'Broadway'];
       const locations = [
         { city: 'New York', state: 'NY', stateFull: 'New York' },
@@ -56,8 +56,15 @@ export function generateRandomAddress() {
       const location = locations[Math.floor(Math.random() * locations.length)];
       const zipCode = Math.floor(Math.random() * 90000 + 10000).toString();
 
-      return `${randomStreet}, ${location.city}, ${location.stateFull}, ${zipCode}`;
-    }
+      return {
+        address: randomStreet,
+        city: location.city,
+        state: location.stateFull,
+        zipCode: zipCode
+    };
+}
+
+
 
 export function saveUserData(firstName, lastName, email, password, birthDay, address) {
     const filePath = path.join(process.cwd(), 'users.csv');

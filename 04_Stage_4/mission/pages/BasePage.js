@@ -35,6 +35,15 @@ export class BasePage {
     await this.page.getByRole('link', { name: filterRegex }).click();
   }
 
+  async select(locator, value) {
+    await locator.selectOption({ label: value });
+  }
+
+  async selectRadioOption(value) {
+    const radioRegex = new RegExp(`${value} \\(\\d+\\)`);
+    await this.page.getByRole('radio', { name: value, exact: false }).click();
+  }
+
   /* =========================
      Assertions
   ========================== */
@@ -49,6 +58,10 @@ export class BasePage {
 
   async verifyElementText(locator, expectedText) {
     await expect(locator).toHaveText(expectedText);
+  }
+
+  async verifyElementContainText(locator, expectedText) {
+    await expect(locator).toContainText(expectedText);
   }
 
   async verifyElementisDisabled(locator) {
