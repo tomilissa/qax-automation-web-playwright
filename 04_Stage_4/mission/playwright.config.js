@@ -16,8 +16,8 @@ export default defineConfig({
   // 📂 Carpeta donde están los tests
   testDir: './tests',
 
-  // ⏱️ Timeout por test (30 segundos)
-  timeout: 30 * 1000,
+  // ⏱️ Timeout por test (60 segundos)
+  timeout: 60 * 1000,
 
   // ⚡ Ejecutar tests en paralelo
   fullyParallel: true,

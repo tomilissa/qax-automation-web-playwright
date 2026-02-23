@@ -1,21 +1,91 @@
 # 🧪 QAXpert – Playwright Automation Project - Mission del Stage 4
 
-Este proyecto contiene pruebas automatizadas E2E sobre el sitio http://www.testingyes.com/onlineshop con Playwright usando JavaScript y el Playwright Test Runner, siguiendo buenas prácticas con Page Object Model, estructura por tests y reutilización de utilidades.
+
+
+Este repositorio contiene una suite de pruebas automatizadas End-to-End (E2E) profesional para la plataforma TestingYes Online Shop. El framework está diseñado bajo estándares de industria para garantizar la calidad en flujos críticos de e-commerce.
+
+
+
+
+## 🏗️ Arquitectura y Patrones
+- Page Object Model (POM): Separación clara entre la lógica de las páginas (OrderPage, AccessoriesPage, etc.) y los scripts de prueba.
+- Data-Driven Testing: Generación dinámica de datos sintéticos (direcciones, usuarios, productos) mediante una capa de utilidades (dataGenerator.ts).
+- Responsive Design Ready: Soporte para ejecución en Desktop y Mobile, con lógica adaptativa para menús colapsables (Hamburger Menu).
+- Fluent Steps: Uso de test.step para reportes de ejecución legibles tanto para perfiles técnicos como de negocio.
+
+
+## 🔥 Flujos de Prueba Automatizados
+1. Ciclo Completo de Compra (E2E)
+  - Navegación por categorías y subcategorías (Accessories > Home Accessories).
+  - Configuración dinámica de productos (cantidad y variantes).
+  - Checkout Multistep: Registro de datos personales, direcciones, métodos de envío y pasarela de pago.
+  - Validación final de confirmación de orden.
+2. Gestión de Usuarios y Seguridad
+  - Registro y login dinámico.
+  - Persistencia de datos de prueba para auditoría.
+  - Validación de mensajes de error en accesos inválidos.
+3. Lógica de Catálogo e Inventario
+  - Filtrado Avanzado: Validación de filtros por color, composición y stock.
+  - Control de Stock: Verificación de que productos sin existencias no permitan la adición al carrito.
+  - Cálculo de Precios: Validación lógica de descuentos aplicados vs. precios de lista.
+
+
+## 🛠️ Requisitos Previos
+- Node.js (v16+)
+- Playwright
+
+
+## 📦 Instalación y Configuración
+1️⃣ Clonar descargar dependencias
+
+```bash
+git clone https://github.com
+cd tu-repositorio
+```
+
+2️⃣ Instala las dependencias:
+
+```bash
+npm install
+npx playwright install
+```
+
+3️⃣ Instala los navegadores de Playwright
+
+```bash
+npx playwright install
+```
+
+4️⃣ Ejecutar los tests
+```bash
+npm test
+```
+----
+
+## 📱 Soporte Multi-dispositivo
+El framework detecta automáticamente el Viewport. Para asegurar la estabilidad en dispositivos móviles, se implementó una lógica de interceptación en la clase HomePage que despliega el menú de navegación solo cuando es necesario (Mobile Mode), evitando fallos por elementos ocultos.
+
+## 📂 Estructura del Proyecto
+```text
+├── pages/               # Clases de Página (POM)
+├── tests/
+│   ├── auth.spec.ts     # Registro y Login
+│   ├── search.spec.ts   # Búsqueda y Descuentos
+│   ├── checkout.spec.ts # Flujo de compra completo
+│   └── utils/           # Generador de data dinámica
+├── playwright.config.ts # Configuración global y proyectos
+└── package.json         # Scripts y dependencias
+
+```
 
 ----
 
-## 📦 Package – ¿para qué sirve?
+## 📦 Package
 
 **El archivo `package.json` define:**
 - Dependencias del proyecto (Playwright)
 - Scripts para ejecutar comandos comunes
 - Metadatos básicos del proyecto
-
-Playwright necesita dos pasos:
-1.	Instalar la librería (npm)
-2.	Instalar los navegadores (Playwright)
-
-----
 
 ## ▶️ Scripts disponibles
 
@@ -27,6 +97,7 @@ Playwright necesita dos pasos:
   "test:headed": "playwright test --headed"
 }
 ```
+
 
 ### 📖 ¿Qué hace cada script?
 
@@ -43,25 +114,9 @@ Playwright necesita dos pasos:
 | `show:report` | `npm run show:report` | Abre el último reporte HTML |
 | `show:trace` | `npm run show:trace` | Abre el archivo trace.zip |
 | `install:browsers` | `npm run install:browsers` | Descarga los navegadores de Playwright |
-----
-
-## 🚀 Cómo usar el proyecto (pasos básicos)
-
-1️⃣ Instalar dependencias
-```bash
-npm install
-```
-2️⃣ Instalar navegadores (solo la primera vez)
-```bash
-npm run install:browsers
-```
-3️⃣ Ejecutar los tests
-```bash
-npm test
-```
-
 
 ----
+
 
 ## 📊 Reportes y Debugging
 

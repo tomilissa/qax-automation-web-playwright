@@ -5,7 +5,7 @@ import { AccessoriesPage } from '../pages/AccessoriesPage';
 import { OrderPage } from '../pages/OrderPage';
 import * as Utils from './utils/dataGenerator';
 
-  test.describe('Navegación y selección de producto', () => {
+  test.describe('Navegación, selección y compra de un producto', () => {
 
   let homePage; 
   let accessoriesPage;
@@ -33,16 +33,14 @@ import * as Utils from './utils/dataGenerator';
         state: randomLocation.state,
         shippingMessage: 'Please deliver between 9 AM and 5 PM.',
         paymentMethod: 'Pay by bank wire',
+
     };
 
     Utils.saveUserData(
         userData.firstName, 
         userData.lastName, 
         userData.email, 
-        userData.password, 
-        userData.birthDay, 
-        userData.address, 
-        userData.zipCode
+        userData.password
     );
 
     await homePage.navigate('');
@@ -68,10 +66,10 @@ import * as Utils from './utils/dataGenerator';
         });
         
       await test.step('Verificar que el filtro por color se aplicó correctamente', async () => {
-          await accessoriesPage.verifyColorFilterIsActive('Black');
-        });  
-        
-    });
+          await accessoriesPage.verifyFilterIsActive('Black', 'color-black');
+        });
+
+     });   
 
     test('Verificar que los productos sin stock no se pueden añadir al carrito', async ({ }) => {
 
@@ -88,7 +86,7 @@ import * as Utils from './utils/dataGenerator';
         });
         
       await test.step('Verificar que el filtro por tipo de producto se aplicó correctamente', async () => {
-          await accessoriesPage.verifyCompositionFilterIsActive('Ceramic');
+          await accessoriesPage.verifyFilterIsActive('Ceramic', 'Composition-Ceramic');
         });
 
       await test.step('Hacer click en botón "Quick View"', async () => {
@@ -116,11 +114,11 @@ import * as Utils from './utils/dataGenerator';
         });
         
       await test.step('Verificar que el filtro por tipo de producto se aplicó correctamente', async () => {
-          await accessoriesPage.verifyCompositionFilterIsActive('Ceramic');
+          await accessoriesPage.verifyFilterIsActive('Ceramic', 'Composition-Ceramic');
         });
 
       await test.step('Hacer click en botón "Quick View"', async () => {
-          await accessoriesPage.selectQuickViewBtn(2);
+          await accessoriesPage.selectQuickViewBtn(3);
         });
 
       await test.step('Verificar que el producto tiene stock', async () => {
@@ -128,11 +126,11 @@ import * as Utils from './utils/dataGenerator';
         });
         
       await test.step('Modificar la cantidad y agregar producto al carrito', async () => {
-          await accessoriesPage.setQuantityandAddToCart(2);
+          await accessoriesPage.setQuantityandAddToCart();
         });
 
       await test.step('Validar que el nombre, precio y cantidad sean visibles', async () => {
-          await accessoriesPage.verifyProducAddedSuccessfully(2);
+          await accessoriesPage.verifyProducAddedSuccessfully();
         });
 
       await test.step('Seleccionar boton "Proceed to checkout"', async () => {  

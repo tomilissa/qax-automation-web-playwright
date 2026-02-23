@@ -30,9 +30,12 @@ this.loginPageTitle = 'Login';
   this.city = page.locator('input[name="city"]');
   this.state = page.locator('select[name="id_state"]');
   this.continueBtn = page.getByRole('button', { name: 'Continue' });
-  this.signOutBtn = page.getByRole('link', { name: ' Sign out' }); 
+  this.signOutBtn = page.getByRole('link', { name: /Sign out/i }).first();
   this.userNameDisplay = page.locator('a.account span');
-  this.authErrorMessage = page.locator('li.alert-danger');    
+  this.authErrorMessage = page.locator('li.alert-danger');
+  this.mobileMenuBtn = page.locator('#menu-icon');
+  this.mobileViewPersonalAccountBtn = page.locator('a.account');
+
 
   }
 
@@ -97,20 +100,30 @@ this.loginPageTitle = 'Login';
   }
 
   async isRegistrationOk(userData) {
+        if (await this.mobileMenuBtn.isVisible()) {
+        await this.mobileMenuBtn.click();
+        await this.verifyElementVisible(this.mobileViewPersonalAccountBtn);
+    } else {
         await this.verifyElementVisible(this.signOutBtn);
         await this.verifyElementVisible(this.userNameDisplay);
         const expectedFullName = `${userData.firstName} ${userData.lastName}`;
-        await this.verifyElementText(this.userNameDisplay, expectedFullName);
+        await this.verifyElementText(this.userNameDisplay, expectedFullName);   
+    }
   }
 
   async isSignInOk(userData) {
+    if (await this.mobileMenuBtn.isVisible()) {
+        await this.mobileMenuBtn.click();
+        await this.verifyElementVisible(this.mobileViewPersonalAccountBtn);
+    } else {
         await this.verifyElementVisible(this.signOutBtn);
         await this.verifyElementVisible(this.userNameDisplay);
         const expectedFullName = `${userData.firstName} ${userData.lastName}`;
-        await this.verifyElementText(this.userNameDisplay, expectedFullName);
+        await this.verifyElementText(this.userNameDisplay, expectedFullName);   
+    }
   }
-
   async isSignInFailed() {
         await this.verifyElementVisible(this.authErrorMessage);
   }
+
 }

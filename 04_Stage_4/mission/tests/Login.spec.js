@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
-import { generateRandomFirstName, generateRandomLastName, generateRandomEmail, generateRandomPassword, generateRandomBirthday, saveUserData } from './utils/dataGenerator';
+import * as Utils from './utils/dataGenerator';
 import { LoginPage } from '../pages/LoginPage';
 
   test.describe('Create user & Login', () => {
@@ -14,14 +14,14 @@ import { LoginPage } from '../pages/LoginPage';
     loginPage = new LoginPage(page);
     
     userData = {
-        firstName: generateRandomFirstName(),
-        lastName: generateRandomLastName(),
-        email: generateRandomEmail(),
-        password: generateRandomPassword(),
-        birthDay: generateRandomBirthday(),
+        firstName: Utils.generateRandomFirstName(),
+        lastName: Utils.generateRandomLastName(),
+        email: Utils.generateRandomEmail(),
+        password: Utils.generateRandomPassword(),
+        birthDay: Utils.generateRandomBirthday(),
     };
 
-    saveUserData(userData.firstName, userData.lastName, userData.email, userData.password, userData.birthDay);
+    Utils.saveUserData(userData.firstName, userData.lastName, userData.email, userData.password);
     
     await homePage.navigate('');
     await homePage.isAtHomePage();

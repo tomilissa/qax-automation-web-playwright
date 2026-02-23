@@ -66,15 +66,15 @@ export function generateRandomLocation() {
 
 
 
-export function saveUserData(firstName, lastName, email, password, birthDay, address) {
+export function saveUserData(firstName, lastName, email, password) {
     const filePath = path.join(process.cwd(), 'users.csv');
     const date = new Date().toLocaleString();
     
     // Formato: fecha, firstName, lastName, email, password, birthDay, address
-    const line = `${date},${firstName},${lastName},${email},${password},${birthDay},${address}\n`;
+    const line = `${date},${firstName},${lastName},${email},${password}\n`;
 
     if (!fs.existsSync(filePath)) {
-        const header = "Fecha_Registro,Nombre,Apellido,Email,Password,Fecha_Nacimiento,Direccion\n";
+        const header = "Fecha_Registro,Hora_Registro,Nombre,Apellido,Email,Password\n";
         fs.writeFileSync(filePath, header, 'utf8');
     }
 

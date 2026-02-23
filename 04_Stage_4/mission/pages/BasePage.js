@@ -44,6 +44,21 @@ export class BasePage {
     await this.page.getByRole('radio', { name: value, exact: false }).click();
   }
 
+  async selectQuickViewBtn(index = 0) {
+    const product = this.productCard.nth(index);
+    const quickViewBtn = product.locator('.quick-view');
+
+    if (await this.mobileMenuBtn.isVisible()) {
+        await quickViewBtn.dispatchEvent('click');
+    } else {
+        await product.hover();
+        await expect(quickViewBtn).toBeVisible();
+        await quickViewBtn.click();
+    }
+  }
+
+
+
   /* =========================
      Assertions
   ========================== */

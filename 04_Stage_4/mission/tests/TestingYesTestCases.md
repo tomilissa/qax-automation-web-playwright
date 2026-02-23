@@ -14,6 +14,24 @@
 *   **Then:** la página muestra el mensaje de error indicando que las credenciales son inválidas.
 
 
+## ✅ Casos de Prueba HomePage (Search).spec
+
+### **Scenario: CP01 - Buscar productos por nombre parcial**
+*   **Given:** el usuario ingresa un término en el buscador
+*   **When:** hace click en el botón de búsqueda
+*   **Then:** la página muestra todos los resultados que coincidan con el término ingresado.
+
+### **Scenario: CP02 - Buscar producto seleccionando una sugerencia del desplegable**
+*   **Given:** el usuario ingresa un término en el buscador
+*   **When:** hace click en una sugerencia del desplegable
+*   **Then:** la página muestra el detalle del producto seleccionado en el desplegable.
+
+### **Scenario: CP03 - Validar que el descuento del producto se aplica correctamente**
+*   **Given:** el usuario encuentra un producto con descuento
+*   **When:** el usuario calcula el valor del descuento
+*   **Then:** el nuevo precio tiene el descuento aplicado correctamente
+
+
 ## ✅ Casos de Prueba Accessories.spec
 
 ### **Scenario: CP01 - Navegar y filtrar productos**
@@ -34,6 +52,9 @@
 *   **And:** el usuario hace click en botón "Quick View" de un producto con stock
 *   **And:** el usuario elige la cantidad y hace click en "Add to Cart"
 *   **Then:** el producto se agrega correctamente al carrito.
+
+
+
 
 
 
