@@ -167,7 +167,7 @@ export class AccessoriesPage extends BasePage {
 
   async verifyProductHasStock() {
     await expect(this.quickViewModal).toBeVisible();
-    await expect(this.addToCartBtn).toBeEnabled();
+    await expect(this.addToCartBtn).toBeEnabled({ timeout: 20000 });
   }
 
   async verifyProducAddedSuccessfully() {

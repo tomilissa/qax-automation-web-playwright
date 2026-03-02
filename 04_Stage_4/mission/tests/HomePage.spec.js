@@ -1,6 +1,7 @@
 import { test } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { AccessoriesPage } from '../pages/AccessoriesPage';
+import { LoginPage } from '../pages/LoginPage';
 
 
 test.describe('Buscar productos', () => {
@@ -9,13 +10,24 @@ test.describe('Buscar productos', () => {
   const completeProductName = 'Mug The Best is yet to come';
 
   let homePage;
-  let accessoriesPage; 
+  let accessoriesPage;
+  let loginPage; 
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }, testInfo) => {
     homePage = new HomePage(page);
     accessoriesPage = new AccessoriesPage(page);
+    loginPage = new LoginPage(page);
+
+    const { user, pass } = testInfo.project.use.credentials;
     
     await homePage.navigate('');
+
+    await test.step('Loggearse con el usuario de la configuración', async () => {
+        await homePage.clickOnSignIn();
+        await loginPage.fillSignInForm({ email: user, password: pass });
+        await homePage.navigate('');
+    });
+
     await homePage.isAtHomePage();
     });
 
