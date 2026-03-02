@@ -1,16 +1,37 @@
-Localizando elementos
+## Locators Shadow
 
-## Shadow DOM
-page.locator('#content').getBytext('Hello Shadow DOM')
+// Localizando elementos
+
+// Shadow DOM
+
+const shadowDOM = page.locator('#content');
+shadowDOM.getByText('Hello Shadow DOM');
 
 
-## IFrame
-page.frameLocator('#my-iframe').getBytext('Nibh netus aliquet nam mattis vestibulum')
+// IFrame
+const myiFrame = page.frameLocator('#my-iframe')
+myiFrame.getBytext('Nibh netus aliquet nam mattis vestibulum')
 
-## PopUp
 
-page.on('dialog', async dialog => {
-        console.log(`Mensaje recibido: ${dialog.message()}`);
-        expect(dialog.message()).toBe('Hello world!');
-        await dialog.accept();
-    });
+// PopUp
+
+// Aceptar un alert
+
+launchAlert = page.getByRole('button', { name: 'Launch Alert' }).click();
+
+
+// Confirm: aceptar o cancelar
+
+launchConfirm = page.getByRole('button', { name: 'Launch confirm' }).click();
+
+// Prompt: Escribir texto y aceptar
+
+launchPrompt = page.getByRole('button', { name: 'Launch prompt' }).click();
+
+
+// Launch Modal
+const modalBtn = page.getByRole('button', { name: 'Launch modal' }).click();
+
+const modal = page.locator('#my-modal');
+
+const modalTitle = modal.locator('.modal-title');
