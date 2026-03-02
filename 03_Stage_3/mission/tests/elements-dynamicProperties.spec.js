@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
-import { ElementsPage } from '../../pages/ElementsPage';
+import { HomePage } from '../pages/HomePage';
+import { ElementsPage } from '../pages/ElementsPage';
 
 test.describe('Validación de Propiedades Dinámicas', () => {
 
@@ -20,7 +20,7 @@ test.describe('Validación de Propiedades Dinámicas', () => {
     await page.close();
   });
 
-  test('Verificar que el primer botón se habilite luego de la espera', async ({ page }) => {
+  test('Verificar que el primer botón se habilite luego de la espera', async ({ }) => {
  
     await test.step('Verificar que el botón está originalmente deshabilitado', async () => {
         await elementsPage.verifyButtonIsDisabled();
@@ -32,7 +32,7 @@ test.describe('Validación de Propiedades Dinámicas', () => {
 
    });
 
-   test('Verificar que el color del texto del botón cambia luego de la espera', async ({ page }) => {
+   test('Verificar que el color del texto del botón cambia luego de la espera', async ({ }) => {
    
     await test.step('Verificar que el color del texto del botón es originalmente blanco', async () => {
         await elementsPage.verifyButtonColorIsWhite();
