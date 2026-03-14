@@ -90,7 +90,7 @@ import * as Utils from './utils/dataGenerator';
         });
 
       await test.step('Hacer click en botón "Quick View"', async () => {
-          await accessoriesPage.selectQuickViewBtn(0);
+          await accessoriesPage.selectQuickViewBtn(2);
         });
 
       await test.step('Verificar que el producto no tiene stock', async () => {
@@ -118,7 +118,7 @@ import * as Utils from './utils/dataGenerator';
         });
 
       await test.step('Hacer click en botón "Quick View"', async () => {
-          await accessoriesPage.selectQuickViewBtn(0);
+          await accessoriesPage.selectQuickViewBtn(2);
         });
 
       await test.step('Verificar que el producto tiene stock', async () => {
