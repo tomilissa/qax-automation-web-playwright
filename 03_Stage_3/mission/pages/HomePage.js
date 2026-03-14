@@ -21,15 +21,9 @@ export class HomePage extends BasePage {
     // 2. Localizar el submenú (ej: Buttons)
     // Esperamos a que la lista lateral aparezca
     const option = this.page.locator('li.btn', { hasText: menuOptionName }).first();
-    
-    // 3. LA SOLUCIÓN DEFINITIVA: 
-    // Si el click normal de Playwright falla, usamos evaluate para clickear via JavaScript
-    // Esto se salta cualquier bloqueo de anuncios o problemas de scroll
-    await option.waitFor({ state: 'attached', timeout: 10000 });
-    await option.evaluate(node => {
-        node.scrollIntoView();
-        node.click();
-    });
+    await option.click({ force: true });
+  
+  
 }
 
   /* =========================

@@ -13,7 +13,6 @@ test.describe('Buttons (Acciones de Clic)', () => {
 
     await context.route('**/*googleads*', route => route.abort());
     
-    // Cambié a 'domcontentloaded' porque 'networkidle' suele fallar en DemoQA
     await page.goto('https://demoqa.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     await homePage.selectCardAndOption('Elements', 'Buttons');

@@ -37,8 +37,11 @@ export class BasePage {
   }
 
   async selectCheckBox(locator, checkboxOption) {
-    await locator.filter({ hasText: checkboxOption }).check();
-  }
+    await locator
+      .filter({ hasText: new RegExp(`^${checkboxOption}$`) }) 
+      .locator('.rct-title')
+      .click();
+   }   
 
   async selectCheckBox2(checkboxOption) {
   await this.page.getByLabel(checkboxOption).check({ force: true });
@@ -52,8 +55,9 @@ export class BasePage {
   }
 
   async selectRadioButton(locator, radioButtonOption) {
-    await locator.filter({ hasText: radioButtonOption, exact: true }).click();
-  }
+    const option = locator.locator('label').filter({ has: this.page.getByText(radioButtonOption, { exact: true }) });
+    await option.click({ force: true });
+}
 
   async selectOption(locator, option) {
     await locator.selectOption(option)
@@ -99,8 +103,7 @@ export class BasePage {
   }
 
   async validateDisabledOption(locator, optionText) {
-    const option = locator.filter({ hasText: optionText }).locator('input');
-    await expect(option).toBeDisabled();
+    await expect(locator).toBeDisabled();
   }
 
   async validateMessageIsVisible(locator) {
@@ -116,7 +119,7 @@ export class BasePage {
   }
 
   async validateElementHasClass(locator, class1) {
-    await expect(locator).toHaveClass(class1);
+    await expect(locator).toHaveClass(class1, { timeout: 6000 });
   }
 
   async validateElementHasValue(locator, value) {

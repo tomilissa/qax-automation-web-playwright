@@ -41,6 +41,7 @@ export class ElementsPage extends BasePage {
     //Radio Buttons
     this.radioButtonSection = page.locator('.custom-radio');
     this.RadioButtonconfirmationMessage = page.locator('.mt-3');
+    this.radioButtonLabel = (option) => page.locator('label', { hasText: option });
 
     //Links
     this.simpleLink = page.locator('#simpleLink');
@@ -76,9 +77,6 @@ export class ElementsPage extends BasePage {
     }
 
     //Checkbox
-    async selectMainCheckboxOption(checkboxOption) {
-        await this.selectCheckBox(this.checkboxOptions, checkboxOption)
-    }
 
     async selectSecondLevelCheckbox(CheckboxLevel2) {
         await this.selectCheckSecndLvl(this.expandAllButton, this.checkboxOptions, CheckboxLevel2)
@@ -108,7 +106,7 @@ export class ElementsPage extends BasePage {
 
     //Radio Buttons
     async selectRadioButtonGeneral(radioButtonOption) {
-        await this.selectRadioButton(this.radioButtonSection, radioButtonOption)
+    await this.radioButtonLabel(radioButtonOption).click({ force: true });
     }
 
     //Links

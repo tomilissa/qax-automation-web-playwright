@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
-import { ElementsPage } from '../../pages/ElementsPage';
+import { HomePage } from '../pages/HomePage';
+import { ElementsPage } from '../pages/ElementsPage';
 
 test.describe('Links (Navegación y Llamadas API)', () => {
 

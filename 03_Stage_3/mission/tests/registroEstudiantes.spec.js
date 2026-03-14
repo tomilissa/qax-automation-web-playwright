@@ -31,22 +31,41 @@ test.describe('Registro exitoso de un estudiante', () => {
 
     homePage = new HomePage(page);
     practiceFormPage = new PracticeFormPage(page);
-        await context.route('**/*googleads*', (route) => route.abort());
-        await context.route('**/*doubleclick*', (route) => route.abort());
-        await context.route('**/*.ad*', (route) => route.abort());
-        await homePage.navigate('/');
-        await page.evaluate(() => {
-            const ads = document.querySelectorAll('#fixedban, footer, [id^="google_ads_iframe_"]');
-            ads.forEach(ad => ad.remove());
-        });
-        await homePage.isAtHomePage();
-        await homePage.selectCardAndOption('Forms', 'Practice Form');
-      });
+        
+        await context.route('**/*googleads*/**', route => route.abort());
+        await context.route('**/*doubleclick*/**', route => route.abort());
+        await context.route(/.*\.ad(s|vertising).*/, route => route.abort());
 
-  test.afterEach(async ({ page }) => {
+        await page.addInitScript(() => {
+        const hideAds = () => {
+            const selectors = [
+                '#fixedban',
+                'ins.adsbygoogle',
+                'div[style*="z-index: 2147483647"]', 
+                'footer', 
+                '[id^="google_ads_iframe_"]', 
+                '.ad-unit',
+                '#adplus-anchor'
+            ];
+            selectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => el.style.display = 'none');
+            });
+        };
+
+        window.addEventListener('DOMContentLoaded', hideAds);
+        setInterval(hideAds, 500);
+        });
+
+            await homePage.navigate('/');
+            await homePage.isAtHomePage();
+            await homePage.selectCardAndOption('Forms', 'Practice Form');
+
+    });
+
+    test.afterEach(async ({ page }) => {
     await page.close();
   });
-
   test('Completar exitosamente el formulario de estudiantes', async () => {
 
     await test.step('Completar campo First Name', async () => {

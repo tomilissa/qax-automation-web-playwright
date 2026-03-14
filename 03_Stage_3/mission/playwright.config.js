@@ -18,6 +18,7 @@ export default defineConfig({
   timeout: 30 * 1000,
   reporter: 'html',
   use: {
+    browserName: 'chromium',
     // 🌐 URL base del sitio a probar
     baseURL: 'https://demoqa.com/',
     

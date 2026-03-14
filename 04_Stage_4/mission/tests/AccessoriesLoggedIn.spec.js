@@ -13,19 +13,20 @@ import * as Utils from './utils/dataGenerator';
   let userData;
   let orderPage;
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }, testInfo) => {
     homePage = new HomePage(page);
     accessoriesPage = new AccessoriesPage(page);
     loginPage = new LoginPage(page);
     orderPage = new OrderPage(page);
 
+    const { user, pass } = testInfo.project.use.credentials;
     const randomLocation = Utils.generateRandomLocation();
     
     userData = {
         firstName: Utils.generateRandomFirstName(),
         lastName: Utils.generateRandomLastName(),
-        email: Utils.generateRandomEmail(),
-        password: Utils.generateRandomPassword(),
+        email: user,
+        password: pass,
         birthDay: Utils.generateRandomBirthday(),
         address: randomLocation.address,
         zipCode: randomLocation.zipCode,
@@ -36,14 +37,15 @@ import * as Utils from './utils/dataGenerator';
 
     };
 
-    Utils.saveUserData(
-        userData.firstName, 
-        userData.lastName, 
-        userData.email, 
-        userData.password
-    );
 
     await homePage.navigate('');
+
+     await test.step('Precondition: The user is logged in', async () => {
+        await homePage.clickOnSignIn();
+        await loginPage.fillSignInForm({ email: user, password: pass });
+        await homePage.navigate('');
+    });
+
     await homePage.isAtHomePage();
     });
 
@@ -90,7 +92,7 @@ import * as Utils from './utils/dataGenerator';
         });
 
       await test.step('Hacer click en botón "Quick View"', async () => {
-          await accessoriesPage.selectQuickViewBtn(2);
+          await accessoriesPage.selectQuickViewBtn(0);
         });
 
       await test.step('Verificar que el producto no tiene stock', async () => {
@@ -118,7 +120,7 @@ import * as Utils from './utils/dataGenerator';
         });
 
       await test.step('Hacer click en botón "Quick View"', async () => {
-          await accessoriesPage.selectQuickViewBtn(2);
+          await accessoriesPage.selectQuickViewBtn(0);
         });
 
       await test.step('Verificar que el producto tiene stock', async () => {
@@ -140,13 +142,9 @@ import * as Utils from './utils/dataGenerator';
       await test.step('Volver a seleccionar "Proceed to checkout"', async () => {  
           await accessoriesPage.finalcheckout();
         });
-        
-      await test.step('Completar personal information', async () => {
-          await loginPage.fillPersonalData(userData);
-        });
 
       await test.step('Completar addresses information', async () => {
-          await loginPage.fillLocationData(userData);
+          await loginPage.clickOnContinue()
         });
         
       await test.step('Seleccionar método de envío y detallar mensaje ', async () => {

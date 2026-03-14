@@ -2,8 +2,16 @@ import { defineConfig, devices } from '@playwright/test';
 
 const ENV = process.env.ENV || 'qa';
 const environments = {
-  qa: 'http://www.testingyes.com/onlineshop/',
-  prod: 'http://www.testingyes.com/onlineshop/'
+  qa: {
+    url: 'http://www.testingyes.com/onlineshop/',
+    user: 'testqalissa@test.com',
+    pass: 'Pass12390!'
+  },
+  prod: {
+    url: 'http://www.testingyes.com/onlineshop/',
+    user: 'testqalissa@test.com',
+    pass: 'Pass12390!'
+  }
 };
 
 // ✅ VALIDACIÓN DEL AMBIENTE
@@ -33,7 +41,11 @@ export default defineConfig({
   reporter: 'html',
   use: {
     // 🌐 URL base del sitio a probar
-    baseURL: environments[ENV],
+    baseURL: environments[ENV].url,
+   credentials: {
+      user: environments[ENV].user,
+      pass: environments[ENV].pass
+    },
     ignoreHTTPSErrors: true,
     
     // 📸 Captura de pantalla en fallos
